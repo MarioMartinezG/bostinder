@@ -1,5 +1,5 @@
 /**
- * Controlador principal de la aplicacion
+  * Controlador principal de la aplicacion
  */
 package co.edu.unbosque.controller;
 
