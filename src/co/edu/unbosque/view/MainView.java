@@ -27,17 +27,18 @@ public class MainView extends JFrame {
 	}
 
 	public void intializeComponents() {
-		//addIndexPanel();
-		//addRegisterPanel();
-		//addLoginPanel();
+		addIndexPanel();
+		addRegisterPanel();
+		addLoginPanel();
 		addHomePanel();
 	}
-	
+
 	public void addIndexPanel() {
 		indexView = new IndexView();
 		indexView.setBounds(0, 0, 1290, 650);
 		indexView.setLayout(null);
 		getContentPane().add(indexView);
+		indexView.setVisible(true);
 	}
 
 	public void addRegisterPanel() {
@@ -45,23 +46,25 @@ public class MainView extends JFrame {
 		registerView.setBounds(0, 0, 1290, 650);
 		registerView.setLayout(null);
 		getContentPane().add(registerView);
-		
+		registerView.setVisible(false);
+
 	}
+
 	public void addLoginPanel() {
 		loginView = new LoginView();
 		loginView.setBounds(0, 0, 1290, 650);
 		loginView.setLayout(null);
 		getContentPane().add(loginView);
+		loginView.setVisible(false);
 	}
+
 	public void addHomePanel() {
 		homeView = new HomeView();
 		homeView.setBounds(0, 0, 1290, 650);
 		homeView.setLayout(null);
 		getContentPane().add(homeView);
-	}
+		homeView.setVisible(false);
 
-	public static void main(String[] args) {
-		MainView mainView = new MainView();
 	}
 
 }
