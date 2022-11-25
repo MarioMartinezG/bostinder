@@ -20,6 +20,7 @@ public class AplMain {
 		new AplMain().start();
 	}
 	public void start() {
+		System.out.println("Aplicación iniciada");
 		initializeControllers();
 	}
 
