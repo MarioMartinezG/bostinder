@@ -13,7 +13,7 @@ import co.edu.unbosque.view.*;
  *
  */
 public class MainController implements ActionListener {
-	
+
 	MainView mainView;
 	IndexView indexView;
 	LoginView loginView;
@@ -21,29 +21,39 @@ public class MainController implements ActionListener {
 	RegisterView registerView;
 
 	public MainController() {
+
+		initializeViews();
 		ejecutar();
 	}
 
-	private void ejecutar() {
+	public void initializeViews() {
+		mainView = new MainView();
 		indexView = new IndexView();
+		loginView = new LoginView();
+	}
+
+	private void ejecutar() {
 		listeners();
 	}
+
 	public void listeners() {
 		indexViewListeners();
 	}
+
 	public void indexViewListeners() {
 		indexView.getRegisterBtn().addActionListener(this);
 		indexView.getLoginBtn().addActionListener(this);
 	}
+
 	public void mainViewListeners() {
 	}
-
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String event = e.getActionCommand();
 		System.out.println(event);
+		
+		
 	}
 
 	public MainView getMainView() {
@@ -85,5 +95,5 @@ public class MainController implements ActionListener {
 	public void setRegisterView(RegisterView registerView) {
 		this.registerView = registerView;
 	}
-	
+
 }

@@ -38,7 +38,7 @@ public class MainView extends JFrame {
 		indexView.setBounds(0, 0, 1290, 650);
 		indexView.setLayout(null);
 		getContentPane().add(indexView);
-		indexView.setVisible(true);
+		indexView.setVisible(false);
 	}
 
 	public void addRegisterPanel() {
@@ -61,7 +61,7 @@ public class MainView extends JFrame {
 		homeView.setBounds(0, 0, 1290, 650);
 		homeView.setLayout(null);
 		getContentPane().add(homeView);
-		homeView.setVisible(false);
+		homeView.setVisible(true);
 	}
 
 }

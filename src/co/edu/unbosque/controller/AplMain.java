@@ -23,19 +23,10 @@ public class AplMain {
 		new AplMain().start();
 	}
 	public void start() {
-		initializeView();
 		initializeControllers();
 	}
-	
-	public void initializeView() {
-		indexView = new IndexView();
-		mainView = new MainView();
-	}
+
 	public void initializeControllers() {
 		controller = new MainController();
-	}
-	public void setViewsToControllers() {
-		controller.setMainView(mainView);
-		controller.setIndexView(indexView);
 	}
 }
