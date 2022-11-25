@@ -16,9 +16,6 @@ public class AplMain {
 	HomeView homeView;
 	IndexView indexView;
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		new AplMain().start();
 	}
