@@ -1,5 +1,5 @@
 /**
- * Controlador principal de la aplicacion
+* Controlador principal de la aplicacion
  */
 package co.edu.unbosque.controller;
 
@@ -91,7 +91,7 @@ public class MainController implements ActionListener {
 	public RegisterView getRegisterView() {
 		return registerView;
 	}
-
+	
 	public void setRegisterView(RegisterView registerView) {
 		this.registerView = registerView;
 	}

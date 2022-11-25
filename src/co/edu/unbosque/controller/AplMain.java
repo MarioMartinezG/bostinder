@@ -29,4 +29,8 @@ public class AplMain {
 	public void initializeControllers() {
 		controller = new MainController();
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> develop
