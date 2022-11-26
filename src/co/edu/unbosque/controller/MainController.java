@@ -22,38 +22,79 @@ public class MainController implements ActionListener {
 
 	public MainController() {
 
-		initializeViews();
 		ejecutar();
 	}
 
 	public void initializeViews() {
 		mainView = new MainView();
 		indexView = new IndexView();
+		registerView = new RegisterView();
 		loginView = new LoginView();
 	}
 
 	private void ejecutar() {
-		listeners();
-	}
 
-	public void listeners() {
+		initializeViews();
 		indexViewListeners();
+		registerViewListeners();
+		loginViewListeners();
+		homeViewListernes();
+		
 	}
 
 	public void indexViewListeners() {
-		indexView.getRegisterBtn().addActionListener(this);
-		indexView.getLoginBtn().addActionListener(this);
+		mainView.getIndexView().getRegisterBtn().addActionListener(this);
+		mainView.getIndexView().getLoginBtn().addActionListener(this);
+		mainView.getIndexView().getFileBtn().addActionListener(this);
 	}
 
-	public void mainViewListeners() {
+	public void registerViewListeners() {
+		mainView.getRegisterView().getBackBtn().addActionListener(this);
+		mainView.getRegisterView().getRegisterBtn().addActionListener(this);
+		mainView.getRegisterView().getLoginBtn().addActionListener(this);
+	}
+
+	public void loginViewListeners() {
+		mainView.getLoginView().getRegisterBtn().addActionListener(this);
+		mainView.getLoginView().getLoginBtn().addActionListener(this);
+		mainView.getLoginView().getBackBtn().addActionListener(this);
+	}
+	public void homeViewListernes() {
+
+		mainView.getHomeView().getBackBtn().addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String event = e.getActionCommand();
-		System.out.println(event);
-		
-		
+		System.out.println(e.getActionCommand());
+		String command = e.getActionCommand();
+		switch (command) {
+		case "file":
+
+			break;
+
+		case "login":
+			mainView.getIndexView().setVisible(false);
+			mainView.getRegisterView().setVisible(false);
+			mainView.getLoginView().setVisible(true);
+			break;
+
+		case "register":
+			mainView.getIndexView().setVisible(false);
+			mainView.getRegisterView().setVisible(true);
+			break;
+		case "back":
+			mainView.getIndexView().setVisible(true);
+			mainView.getRegisterView().setVisible(false);
+			mainView.getLoginView().setVisible(false);
+			
+		case "valid-access":
+			mainView.getLoginView().setVisible(false);
+			mainView.getRegisterView().setVisible(false);
+			mainView.getHomeView().setVisible(true);
+			break;
+		}
+
 	}
 
 	public MainView getMainView() {

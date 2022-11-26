@@ -67,4 +67,37 @@ public class MainView extends JFrame {
 
 	}
 
+	public RegisterView getRegisterView() {
+		return registerView;
+	}
+
+	public void setRegisterView(RegisterView registerView) {
+		this.registerView = registerView;
+	}
+
+	public IndexView getIndexView() {
+		return indexView;
+	}
+
+	public void setIndexView(IndexView indexView) {
+		this.indexView = indexView;
+	}
+
+	public LoginView getLoginView() {
+		return loginView;
+	}
+
+	public void setLoginView(LoginView loginView) {
+		this.loginView = loginView;
+	}
+
+	public HomeView getHomeView() {
+		return homeView;
+	}
+
+	public void setHomeView(HomeView homeView) {
+		this.homeView = homeView;
+	}
+	
+
 }

@@ -66,6 +66,7 @@ public class RegisterView extends JPanel {
 		registerBtn.setBackground(new Color(30, 55, 92));
 		registerBtn.setBounds(480, 480, 300, 40);
 		registerBtn.setForeground(new Color(230, 230, 230));
+		registerBtn.setActionCommand("valid-access");
 		registerBtn.setBorder(emptyBorder);
 		add(registerBtn);
 
@@ -73,6 +74,7 @@ public class RegisterView extends JPanel {
 		loginBtn.setFont(new Font("Roboto", Font.BOLD, 12));
 		loginBtn.setBackground(Color.white);
 		loginBtn.setBounds(480, 530, 300, 30);
+		loginBtn.setActionCommand("login");
 		loginBtn.setBorder(emptyBorder);
 		add(loginBtn);
 
@@ -80,7 +82,81 @@ public class RegisterView extends JPanel {
 		backBtn.setFont(new Font("Roboto", Font.BOLD, 12));
 		backBtn.setBackground(Color.white);
 		backBtn.setBounds(10, 10, 50, 50);
+		backBtn.setActionCommand("back");
 		backBtn.setBorder(emptyBorder);
 		add(backBtn);
 	}
+
+	public JPanel getImg() {
+		return img;
+	}
+
+	public void setImg(JPanel img) {
+		this.img = img;
+	}
+
+	public JLabel getTitleLbl() {
+		return titleLbl;
+	}
+
+	public void setTitleLbl(JLabel titleLbl) {
+		this.titleLbl = titleLbl;
+	}
+
+	public JTextField getEmailField() {
+		return emailField;
+	}
+
+	public void setEmailField(JTextField emailField) {
+		this.emailField = emailField;
+	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	public void setNameField(JTextField nameField) {
+		this.nameField = nameField;
+	}
+
+	public JTextField getGenderField() {
+		return genderField;
+	}
+
+	public void setGenderField(JTextField genderField) {
+		this.genderField = genderField;
+	}
+
+	public JTextField getBorndate() {
+		return borndate;
+	}
+
+	public void setBorndate(JTextField borndate) {
+		this.borndate = borndate;
+	}
+
+	public JButton getRegisterBtn() {
+		return registerBtn;
+	}
+
+	public void setRegisterBtn(JButton registerBtn) {
+		this.registerBtn = registerBtn;
+	}
+
+	public JButton getLoginBtn() {
+		return loginBtn;
+	}
+
+	public void setLoginBtn(JButton loginBtn) {
+		this.loginBtn = loginBtn;
+	}
+
+	public JButton getBackBtn() {
+		return backBtn;
+	}
+
+	public void setBackBtn(JButton backBtn) {
+		this.backBtn = backBtn;
+	}
+	
 }

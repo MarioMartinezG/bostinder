@@ -40,6 +40,7 @@ public class IndexView extends JPanel {
 		fileBtn.setBackground(new Color(230, 230, 230));
 		fileBtn.setForeground(new Color(30, 55, 92));
 		fileBtn.setBounds(480, 435, 300, 40);
+		fileBtn.setActionCommand("file");
 		fileBtn.setBorder(emptyBorder);
 		add(fileBtn);
 
@@ -48,6 +49,7 @@ public class IndexView extends JPanel {
 		registerBtn.setBackground(new Color(30, 55, 92));
 		registerBtn.setBounds(480, 480, 300, 40);
 		registerBtn.setForeground(new Color(230, 230, 230));
+		registerBtn.setActionCommand("register");
 		registerBtn.setBorder(emptyBorder);
 		add(registerBtn);
 
@@ -55,6 +57,7 @@ public class IndexView extends JPanel {
 		loginBtn.setFont(new Font("Roboto", Font.BOLD, 12));
 		loginBtn.setBackground(Color.white);
 		loginBtn.setBounds(480, 530, 300, 30);
+		loginBtn.setActionCommand("login");
 		loginBtn.setBorder(emptyBorder);
 		add(loginBtn);
 
