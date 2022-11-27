@@ -14,11 +14,11 @@ import co.edu.unbosque.view.*;
  */
 public class MainController implements ActionListener {
 
-	MainView mainView;
-	IndexView indexView;
-	LoginView loginView;
-	HomeView homeView;
-	RegisterView registerView;
+	private MainView mainView;
+	private IndexView indexView;
+	private LoginView loginView;
+	private HomeView homeView;
+	private RegisterView registerView;
 
 	public MainController() {
 
