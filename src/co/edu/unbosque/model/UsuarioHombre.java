@@ -12,7 +12,7 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class UsuarioHombre extends Usuario {
 
-	private long ingresosMensuales;
+	private double ingresosMensuales;
 
 	/**
 	 * Constructor de la clase UsuarioHombre
@@ -30,8 +30,8 @@ public class UsuarioHombre extends Usuario {
 	 * @param estado            - Estado del usuario
 	 * @param ingresosMensuales - Ingresos del Usuario Hombre
 	 */
-	public UsuarioHombre(String nombre, String apellido1, String apellido2, char genero, String usuario,
-			String contrasena, String correo, Date fechaNacimiento, int edad, boolean estado, long ingresosMensuales) {
+	public UsuarioHombre(String nombre, String apellido1, String apellido2, String genero, String usuario,
+			String contrasena, String correo, String fechaNacimiento, int edad, boolean estado, double ingresosMensuales) {
 		super(nombre, apellido1, apellido2, genero, usuario, contrasena, correo, fechaNacimiento, edad, estado);
 		this.ingresosMensuales = ingresosMensuales;
 	}
@@ -39,14 +39,14 @@ public class UsuarioHombre extends Usuario {
 	/**
 	 * @return the ingresosMensuales
 	 */
-	public long getIngresosMensuales() {
+	public double getIngresosMensuales() {
 		return ingresosMensuales;
 	}
 
 	/**
 	 * @param ingresosMensuales the ingresosMensuales to set
 	 */
-	public void setIngresosMensuales(long ingresosMensuales) {
+	public void setIngresosMensuales(double ingresosMensuales) {
 		this.ingresosMensuales = ingresosMensuales;
 	}
 

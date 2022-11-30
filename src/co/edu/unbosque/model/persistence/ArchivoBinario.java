@@ -65,7 +65,7 @@ public class ArchivoBinario {
 	 * 
 	 * @param listaUsuarios - Arreglo de usuarios deserializado de usuarios.dat
 	 */
-	public void escribirEnArchivoAmigos(ArrayList<Usuario> listaUsuarios) {
+	public void escribirEnArchivoUsuarios(ArrayList<Usuario> listaUsuarios) {
 		try {
 			this.salida = new ObjectOutputStream(new FileOutputStream(this.archivoUsuarios));
 			this.salida.writeObject(listaUsuarios);

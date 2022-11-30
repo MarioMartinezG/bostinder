@@ -19,11 +19,11 @@ public abstract class Usuario implements Serializable {
 	protected String nombre;
 	protected String apellido1;
 	protected String apellido2;
-	protected char genero;
+	protected String genero;
 	protected String usuario;
 	protected String contrasena;
 	protected String correo;
-	protected Date fechaNacimiento;
+	protected String fechaNacimiento;
 	protected int edad;
 	protected int likesRecibidos;
 	protected int likesOtorgados;
@@ -45,8 +45,8 @@ public abstract class Usuario implements Serializable {
 	 * @param edad            - Edad del usuario
 	 * @param estado          - Estado del usuario
 	 */
-	protected Usuario(String nombre, String apellido1, String apellido2, char genero, String usuario, String contrasena,
-			String correo, Date fechaNacimiento, int edad, boolean estado) {
+	protected Usuario(String nombre, String apellido1, String apellido2, String genero, String usuario, String contrasena,
+			String correo, String fechaNacimiento, int edad, boolean estado) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
@@ -163,14 +163,14 @@ public abstract class Usuario implements Serializable {
 	/**
 	 * @return the genero
 	 */
-	public char getGenero() {
+	public String getGenero() {
 		return genero;
 	}
 
 	/**
 	 * @param genero the genero to set
 	 */
-	public void setGenero(char genero) {
+	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 
@@ -219,14 +219,14 @@ public abstract class Usuario implements Serializable {
 	/**
 	 * @return the fechaNacimiento
 	 */
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
 	/**
 	 * @param fechaNacimiento the fechaNacimiento to set
 	 */
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

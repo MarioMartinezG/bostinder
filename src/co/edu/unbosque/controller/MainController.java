@@ -5,20 +5,31 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 
+import co.edu.unbosque.model.Usuario;
+import co.edu.unbosque.model.persistence.ArchivoBinario;
+import co.edu.unbosque.model.persistence.LectorCSV;
 import co.edu.unbosque.view.*;
 
 /**
- * @author Dayana Serrano, Mario Martínez, Daniela Murcia, Miguel Sánchez
+ * @author Dayana Serrano, Mario MartÃ­nez, Daniela Murcia, Miguel SÃ¡nchez
  *
  */
 public class MainController implements ActionListener {
 
-	private MainView mainView;
-	private IndexView indexView;
-	private LoginView loginView;
-	private HomeView homeView;
-	private RegisterView registerView;
+	final static String RUTA_CSV = "datos/datos.csv";
+	MainView mainView;
+	IndexView indexView;
+	LoginView loginView;
+	HomeView homeView;
+	RegisterView registerView;
+	ArrayList<Usuario> lista;
+	LectorCSV lector;
+	ArchivoBinario archivo;
+
 
 	public MainController() {
 
@@ -31,15 +42,39 @@ public class MainController implements ActionListener {
 		registerView = new RegisterView();
 		loginView = new LoginView();
 	}
+	
+	private void initializeUtils() {
+		lista = new ArrayList<>();
+		lector = new LectorCSV();
+		archivo = new ArchivoBinario();
+	}
 
 	private void ejecutar() {
-
+		
+		initializeUtils();
 		initializeViews();
 		indexViewListeners();
 		registerViewListeners();
 		loginViewListeners();
 		homeViewListernes();
 		
+		cargarUsuariosCSV();
+	}
+	
+	private void cargarUsuariosCSV() {
+		try {
+			lista = lector.leerArchivoCSV(RUTA_CSV);
+			System.out.println("Tamano lista usuarios CSV: " + lista.size());
+			if(archivo.getArchivoUsuarios().length() == 0) {
+				archivo.escribirEnArchivoUsuarios(lista);
+			} else {
+				System.out.println("El binario de usuarios ya tiene datos creados");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void indexViewListeners() {
@@ -70,7 +105,6 @@ public class MainController implements ActionListener {
 		String command = e.getActionCommand();
 		switch (command) {
 		case "file":
-
 			break;
 
 		case "login":

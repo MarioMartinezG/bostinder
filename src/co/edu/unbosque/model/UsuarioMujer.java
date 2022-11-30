@@ -30,8 +30,8 @@ public class UsuarioMujer extends Usuario {
 	 * @param estado          - Estado del usuario (true: activo, false: inactivo)
 	 * @param divorcios       - Indica si ha tenido divorcios (true: SI, false; no)
 	 */
-	public UsuarioMujer(String nombre, String apellido1, String apellido2, char genero, String usuario,
-			String contrasena, String correo, Date fechaNacimiento, int edad, boolean estado, boolean divorcios) {
+	public UsuarioMujer(String nombre, String apellido1, String apellido2, String genero, String usuario,
+			String contrasena, String correo, String fechaNacimiento, int edad, boolean estado, boolean divorcios) {
 		super(nombre, apellido1, apellido2, genero, usuario, contrasena, correo, fechaNacimiento, edad, estado);
 		this.divorcios = divorcios;
 	}
