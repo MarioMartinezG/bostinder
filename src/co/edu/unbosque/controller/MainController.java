@@ -104,7 +104,6 @@ public class MainController implements ActionListener {
 		String command = e.getActionCommand();
 		switch (command) {
 		case "file":
-
 			break;
 
 		case "login":
