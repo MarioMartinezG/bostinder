@@ -29,8 +29,17 @@ public void initializeComponents() {
 	
 	titleLbl = new JLabel("Bienvenido/a, estos son los perfiles");
 	titleLbl.setFont(new Font("Roboto", Font.BOLD, 20));
-	titleLbl.setBounds(140, 30, 300, 50);
+	titleLbl.setBounds(140, 30, 400, 50);
 	add(titleLbl);
+	
+	declineBtn = new JButton("LIKE");
+	declineBtn.setFont(new Font("Roboto", Font.BOLD, 14));
+	declineBtn.setBackground(new Color(30, 55, 92));
+	declineBtn.setBounds(480, 480, 300, 40);
+	declineBtn.setForeground(new Color(230, 230, 230));
+	declineBtn.setActionCommand("valid-access");
+	declineBtn.setBorder(emptyBorder);
+	add(declineBtn);
 	
 	backBtn = new JButton("<");
 	backBtn.setFont(new Font("Roboto", Font.BOLD, 12));

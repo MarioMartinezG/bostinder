@@ -15,7 +15,7 @@ import co.edu.unbosque.model.persistence.LectorCSV;
 import co.edu.unbosque.view.*;
 
 /**
- * @author Dayana Serrano, Mario Martínez, Daniela Murcia, Miguel Sánchez
+ * @author Dayana Serrano, Mario MartÃ­nez, Daniela Murcia, Miguel SÃ¡nchez
  *
  */
 public class MainController implements ActionListener {
@@ -29,6 +29,7 @@ public class MainController implements ActionListener {
 	ArrayList<Usuario> lista;
 	LectorCSV lector;
 	ArchivoBinario archivo;
+
 
 	public MainController() {
 
