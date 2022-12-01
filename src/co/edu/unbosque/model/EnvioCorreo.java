@@ -24,7 +24,7 @@ public class EnvioCorreo {
 	private static Session sesion;
 
 
-	public void enviarCorreo(String destinatario, String usuario, String contrasena) {
+	public boolean enviarCorreo(String destinatario, String usuario, String contrasena) {
 		inicializar();
 
 		try {
@@ -39,8 +39,10 @@ public class EnvioCorreo {
 			Transport.send(message);
 
 			System.out.println("Correo enviado");
+			return true;
 		} catch (MessagingException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 

@@ -18,8 +18,14 @@ public class UsuarioDAO_Impl implements UsuarioDAO {
 	 * @param u     - Usuario a insertar
 	 */
 	@Override
-	public void insertarUsuario(ArrayList<Usuario> lista, Usuario u) {
-		lista.add(u);
+	public boolean insertarUsuario(ArrayList<Usuario> lista, Usuario u) {
+		try {
+			lista.add(u);
+			return true;
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
@@ -60,8 +66,14 @@ public class UsuarioDAO_Impl implements UsuarioDAO {
 	 * @param u     - Usuario a eliminar
 	 */
 	@Override
-	public void eliminarUsuario(ArrayList<Usuario> lista, Usuario u) {
-		lista.remove(u);
+	public boolean eliminarUsuario(ArrayList<Usuario> lista, Usuario u) {
+		try {
+			lista.remove(u);
+			return true;
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
@@ -88,11 +100,14 @@ public class UsuarioDAO_Impl implements UsuarioDAO {
 	 * @param u     - Usuario a buscar
 	 */
 	@Override
-	public void modificarUsuario(ArrayList<Usuario> lista, Usuario u) {
+	public boolean modificarUsuario(ArrayList<Usuario> lista, Usuario u) {
 		Usuario u_buscar = consultarUsuario(lista, u.getNombre().toLowerCase());
 		if (u_buscar != null) {
 			eliminarUsuario(lista, u_buscar);
 			insertarUsuario(lista, u);
+			return true;
+		} else {
+			return false;
 		}
 
 	}

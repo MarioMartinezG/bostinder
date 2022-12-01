@@ -10,10 +10,10 @@ import java.util.ArrayList;
  *
  */
 public interface UsuarioDAO {
-	void insertarUsuario(ArrayList<Usuario> lista, Usuario u);
+	boolean insertarUsuario(ArrayList<Usuario> lista, Usuario u);
 	Usuario consultarUsuario(ArrayList<Usuario> lista, String nombre);
 	String leerUsuarios(ArrayList<Usuario> lista);
-	void eliminarUsuario(ArrayList<Usuario> lista, Usuario u);
+	boolean eliminarUsuario(ArrayList<Usuario> lista, Usuario u);
 	boolean eliminarUsuarioPorNombre(ArrayList<Usuario> lista, String nombre);
-	void modificarUsuario(ArrayList<Usuario> lista, Usuario u);
+	boolean modificarUsuario(ArrayList<Usuario> lista, Usuario u);
 }
