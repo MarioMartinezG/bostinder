@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.Usuario;
+import co.edu.unbosque.model.UsuarioDAO_Impl;
 import co.edu.unbosque.model.UsuarioHombre;
 import co.edu.unbosque.model.UsuarioMujer;
 import co.edu.unbosque.model.persistence.ArchivoBinario;
@@ -28,6 +29,7 @@ public class MainController implements ActionListener {
 	private LoginView loginView;
 	private HomeView homeView;
 	private RegisterView registerView;
+	private UsuarioDAO_Impl dao;
 	private UsuarioHombre userHombre;
 	private UsuarioMujer userMujer;
 	private ArrayList<Usuario> lista;
@@ -50,6 +52,7 @@ public class MainController implements ActionListener {
 		lista = new ArrayList<>();
 		lector = new LectorCSV();
 		archivo = new ArchivoBinario();
+		dao = new UsuarioDAO_Impl();
 	}
 
 	private void ejecutar() {
@@ -131,20 +134,25 @@ public class MainController implements ActionListener {
 			mainView.getRegisterView().setVisible(false);
 			mainView.getHomeView().setVisible(true);
 
-			String correo = mainView.getRegisterView().getEmailField().getText();
-			String nombre = mainView.getRegisterView().getNameField().getText();
-			String fecha = mainView.getRegisterView().getBornDate().getText();
-			String genero = (String) mainView.getRegisterView().getGenderField().getSelectedItem();
-
-			if (genero.equals("Masculino")) {
-				System.out.println("Usuario masculino");
-				UsuarioHombre userHNuevo = new UsuarioHombre(nombre, genero, command, genero, nombre, genero, correo,
-						fecha, 0, false, 0);
-			} else if (genero.equals("Femenino")) {
-				System.out.println("Usuario femenino");
+			break;
+		
+		case "access":
+			String usuario = mainView.getLoginView().getUserField().getText();
+			String contrasena = mainView.getLoginView().getPassField().getText();
+			
+			Usuario user = dao.consultarUsuario(lista, usuario);
+			if(user != null && user.getContrasena().equals(contrasena)) {
+				System.out.println("Usuario se puede loguear");
+				
+				mainView.getLoginView().getUserField().setText("Usuario");
+				mainView.getLoginView().getPassField().setText("Contraseña");
+				mainView.getLoginView().setVisible(false);
+				mainView.getRegisterView().setVisible(false);
+				mainView.getHomeView().setVisible(true);
 			} else {
-				mainView.showMsgError("Debe seleccionar un género.");
+				mainView.showMsgError("El usuario ingresado no se encuentra registrado");
 			}
+
 			break;
 		}
 
@@ -188,6 +196,20 @@ public class MainController implements ActionListener {
 
 	public void setRegisterView(RegisterView registerView) {
 		this.registerView = registerView;
+	}
+
+	/**
+	 * @return the dao
+	 */
+	public UsuarioDAO_Impl getDao() {
+		return dao;
+	}
+
+	/**
+	 * @param dao the dao to set
+	 */
+	public void setDao(UsuarioDAO_Impl dao) {
+		this.dao = dao;
 	}
 
 }
