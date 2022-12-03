@@ -15,7 +15,7 @@ public class LoginView extends JPanel {
 	final static String LOGO_PATH = "datos/vudu.png";
 	private JLabel img;
 	private JLabel titleLbl;
-	private JTextField emailField, passField;
+	private JTextField userField, passField;
 	private JButton loginBtn, backBtn, registerBtn;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
 
@@ -40,14 +40,14 @@ public class LoginView extends JPanel {
 		titleLbl.setBounds(140, 30, 300, 50);
 		add(titleLbl);
 
-		emailField = new JTextField("Correo electrónico");
-		emailField.setFont(new Font("Roboto", Font.BOLD, 12));
-		emailField.setBackground(new Color(230, 230, 230));
-		emailField.setBorder(emptyBorder);
-		emailField.setBounds(430, 330, 400, 35);
-		add(emailField);
+		userField = new JTextField("Usuario");
+		userField.setFont(new Font("Roboto", Font.BOLD, 12));
+		userField.setBackground(new Color(230, 230, 230));
+		userField.setBorder(emptyBorder);
+		userField.setBounds(430, 330, 400, 35);
+		add(userField);
 
-		passField = new JTextField("Nombre");
+		passField = new JTextField("Contraseña");
 		passField.setBackground(new Color(230, 230, 230));
 		passField.setFont(new Font("Roboto", Font.BOLD, 12));
 		passField.setBorder(emptyBorder);
@@ -59,7 +59,7 @@ public class LoginView extends JPanel {
 		registerBtn.setBackground(new Color(30, 55, 92));
 		registerBtn.setBounds(480, 480, 300, 40);
 		registerBtn.setForeground(new Color(230, 230, 230));
-		registerBtn.setActionCommand("valid-access");
+		registerBtn.setActionCommand("access");
 		registerBtn.setBorder(emptyBorder);
 		add(registerBtn);
 
@@ -108,12 +108,12 @@ public class LoginView extends JPanel {
 		this.titleLbl = titleLbl;
 	}
 
-	public JTextField getEmailField() {
-		return emailField;
+	public JTextField getUserField() {
+		return userField;
 	}
 
-	public void setEmailField(JTextField emailField) {
-		this.emailField = emailField;
+	public void setUserField(JTextField userField) {
+		this.userField = userField;
 	}
 
 	public JTextField getPassField() {

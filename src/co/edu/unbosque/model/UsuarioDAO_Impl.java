@@ -31,14 +31,14 @@ public class UsuarioDAO_Impl implements UsuarioDAO {
 	/**
 	 * Metodo para consultar un usuario
 	 * 
-	 * @param lista  - ArrayList con los Usuarios
-	 * @param nombre - Nombre del usuario a buscar
+	 * @param lista         - ArrayList con los Usuarios
+	 * @param nombreUsuario - Alias del usuario a buscar
 	 */
 	@Override
-	public Usuario consultarUsuario(ArrayList<Usuario> lista, String nombre) {
+	public Usuario consultarUsuario(ArrayList<Usuario> lista, String nombreUsuario) {
 		Usuario x = null;
 		for (Usuario usuario : lista) {
-			if (usuario.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+			if (usuario.getUsuario().equals(nombreUsuario)) {
 				x = usuario;
 			}
 		}
