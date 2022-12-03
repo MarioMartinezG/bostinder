@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.Usuario;
+import co.edu.unbosque.model.UsuarioHombre;
+import co.edu.unbosque.model.UsuarioMujer;
 import co.edu.unbosque.model.persistence.ArchivoBinario;
 import co.edu.unbosque.model.persistence.LectorCSV;
 import co.edu.unbosque.view.*;
@@ -21,15 +23,16 @@ import co.edu.unbosque.view.*;
 public class MainController implements ActionListener {
 
 	final static String RUTA_CSV = "datos/datos.csv";
-	MainView mainView;
-	IndexView indexView;
-	LoginView loginView;
-	HomeView homeView;
-	RegisterView registerView;
-	ArrayList<Usuario> lista;
-	LectorCSV lector;
-	ArchivoBinario archivo;
-
+	private MainView mainView;
+	private IndexView indexView;
+	private LoginView loginView;
+	private HomeView homeView;
+	private RegisterView registerView;
+	private UsuarioHombre userHombre;
+	private UsuarioMujer userMujer;
+	private ArrayList<Usuario> lista;
+	private LectorCSV lector;
+	private ArchivoBinario archivo;
 
 	public MainController() {
 
@@ -42,7 +45,7 @@ public class MainController implements ActionListener {
 		registerView = new RegisterView();
 		loginView = new LoginView();
 	}
-	
+
 	private void initializeUtils() {
 		lista = new ArrayList<>();
 		lector = new LectorCSV();
@@ -50,22 +53,22 @@ public class MainController implements ActionListener {
 	}
 
 	private void ejecutar() {
-		
+
 		initializeUtils();
 		initializeViews();
 		indexViewListeners();
 		registerViewListeners();
 		loginViewListeners();
 		homeViewListernes();
-		
+
 		cargarUsuariosCSV();
 	}
-	
+
 	private void cargarUsuariosCSV() {
 		try {
 			lista = lector.leerArchivoCSV(RUTA_CSV);
 			System.out.println("Tamano lista usuarios CSV: " + lista.size());
-			if(archivo.getArchivoUsuarios().length() == 0) {
+			if (archivo.getArchivoUsuarios().length() == 0) {
 				archivo.escribirEnArchivoUsuarios(lista);
 			} else {
 				System.out.println("El binario de usuarios ya tiene datos creados");
@@ -80,7 +83,6 @@ public class MainController implements ActionListener {
 	public void indexViewListeners() {
 		mainView.getIndexView().getRegisterBtn().addActionListener(this);
 		mainView.getIndexView().getLoginBtn().addActionListener(this);
-		mainView.getIndexView().getFileBtn().addActionListener(this);
 	}
 
 	public void registerViewListeners() {
@@ -94,6 +96,7 @@ public class MainController implements ActionListener {
 		mainView.getLoginView().getLoginBtn().addActionListener(this);
 		mainView.getLoginView().getBackBtn().addActionListener(this);
 	}
+
 	public void homeViewListernes() {
 
 		mainView.getHomeView().getBackBtn().addActionListener(this);
@@ -116,16 +119,32 @@ public class MainController implements ActionListener {
 		case "register":
 			mainView.getIndexView().setVisible(false);
 			mainView.getRegisterView().setVisible(true);
+
 			break;
 		case "back":
 			mainView.getIndexView().setVisible(true);
 			mainView.getRegisterView().setVisible(false);
 			mainView.getLoginView().setVisible(false);
-			
+
 		case "valid-access":
 			mainView.getLoginView().setVisible(false);
 			mainView.getRegisterView().setVisible(false);
 			mainView.getHomeView().setVisible(true);
+
+			String correo = mainView.getRegisterView().getEmailField().getText();
+			String nombre = mainView.getRegisterView().getNameField().getText();
+			String fecha = mainView.getRegisterView().getBornDate().getText();
+			String genero = (String) mainView.getRegisterView().getGenderField().getSelectedItem();
+
+			if (genero.equals("Masculino")) {
+				System.out.println("Usuario masculino");
+				UsuarioHombre userHNuevo = new UsuarioHombre(nombre, genero, command, genero, nombre, genero, correo,
+						fecha, 0, false, 0);
+			} else if (genero.equals("Femenino")) {
+				System.out.println("Usuario femenino");
+			} else {
+				mainView.showMsgError("Debe seleccionar un género.");
+			}
 			break;
 		}
 

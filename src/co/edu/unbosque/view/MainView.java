@@ -1,7 +1,5 @@
 package co.edu.unbosque.view;
 
-import java.awt.Color;
-
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -14,7 +12,7 @@ public class MainView extends JFrame {
 
 	public MainView() {
 
-		setTitle("Pantalla Principal | AppName");
+		setTitle("Pantalla Principal | VUDU");
 		setSize(1300, 650);
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,6 +63,14 @@ public class MainView extends JFrame {
 		getContentPane().add(homeView);
 		homeView.setVisible(false);
 
+	}
+	
+	public void showMsgError(String message) {
+		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void showMsgInfo(String message) {
+		JOptionPane.showMessageDialog(null, message, "Información", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public RegisterView getRegisterView() {

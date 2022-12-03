@@ -4,6 +4,7 @@
 package co.edu.unbosque.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -102,11 +103,11 @@ public abstract class Usuario implements Serializable {
 	 * @param fechaNacimiento - Fecha de nacimiento del usuario en formato
 	 *                        DD/MM/YYYY
 	 */
-	protected boolean validarEdad(Date fechaNacimiento) {
+	protected boolean validarEdad(String fechaNacimiento) {
 		boolean resultado;
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate fecha = LocalDate.parse((CharSequence) fechaNacimiento, formatter);
+		LocalDate fecha = LocalDate.parse(fechaNacimiento, formatter);
 		Period edad = Period.between(fecha, LocalDate.now());
 
 		if (edad.getYears() >= 18 && edad.getMonths() >= 0 && edad.getDays() >= 0) {

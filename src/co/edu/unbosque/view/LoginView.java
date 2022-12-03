@@ -2,13 +2,18 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
 public class LoginView extends JPanel {
-
-	private JPanel img;
+	final static String LOGO_PATH = "datos/vudu.png";
+	private JLabel img;
 	private JLabel titleLbl;
 	private JTextField emailField, passField;
 	private JButton loginBtn, backBtn, registerBtn;
@@ -18,14 +23,16 @@ public class LoginView extends JPanel {
 
 		setBackground(Color.white);
 		initializeComponents();
+
 	}
 
 	public void initializeComponents() {
 		// Panel size: 1260x590
 
-		img = new JPanel();
+		img = new JLabel();
 		img.setBackground(Color.lightGray);
 		img.setBounds(60, 30, 70, 70);
+		img.setIcon(createLogo());
 		add(img);
 
 		titleLbl = new JLabel("Bienvenido/a, inicia sesion");
@@ -73,11 +80,23 @@ public class LoginView extends JPanel {
 		add(backBtn);
 	}
 
-	public JPanel getImg() {
+	private ImageIcon createLogo() {
+		ImageIcon logo = null;
+		try {
+			BufferedImage img = ImageIO.read(new File(LOGO_PATH));
+			Image rImg = img.getScaledInstance(this.img.getWidth(), this.img.getHeight(), Image.SCALE_SMOOTH);
+			logo = new ImageIcon(rImg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return logo;
+	}
+
+	public JLabel getImg() {
 		return img;
 	}
 
-	public void setImg(JPanel img) {
+	public void setImg(JLabel img) {
 		this.img = img;
 	}
 
@@ -128,5 +147,5 @@ public class LoginView extends JPanel {
 	public void setRegisterBtn(JButton registerBtn) {
 		this.registerBtn = registerBtn;
 	}
-	
+
 }

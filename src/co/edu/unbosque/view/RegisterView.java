@@ -10,8 +10,10 @@ public class RegisterView extends JPanel {
 
 	private JPanel img;
 	private JLabel titleLbl;
-	private JTextField emailField, nameField, genderField, borndate;
+	private JTextField emailField, nameField, bornDate;
+	private JComboBox<String> genderField;
 	private JButton registerBtn, loginBtn, backBtn;
+	final static String opciones[] = { "Masculino", "Femenino" };
 	Border emptyBorder = BorderFactory.createEmptyBorder();
 
 	public RegisterView() {
@@ -33,28 +35,28 @@ public class RegisterView extends JPanel {
 		titleLbl.setBounds(140, 30, 300, 50);
 		add(titleLbl);
 
-		emailField = new JTextField("Correo electrónico");
-		emailField.setFont(new Font("Roboto", Font.BOLD, 12));
-		emailField.setBackground(new Color(230, 230, 230));
-		emailField.setBorder(emptyBorder);
-		emailField.setBounds(430, 295, 400, 35);
-		add(emailField);
-
 		nameField = new JTextField("Nombre");
 		nameField.setBackground(new Color(230, 230, 230));
 		nameField.setFont(new Font("Roboto", Font.BOLD, 12));
 		nameField.setBorder(emptyBorder);
-		nameField.setBounds(430, 340, 400, 35);
+		nameField.setBounds(430, 295, 400, 35);
 		add(nameField);
 
-		borndate = new JTextField("Fecha de nacimiento");
-		borndate.setFont(new Font("Roboto", Font.BOLD, 12));
-		borndate.setBackground(new Color(230, 230, 230));
-		borndate.setBorder(emptyBorder);
-		borndate.setBounds(430, 385, 400, 35);
-		add(borndate);
+		emailField = new JTextField("Correo electrónico");
+		emailField.setFont(new Font("Roboto", Font.BOLD, 12));
+		emailField.setBackground(new Color(230, 230, 230));
+		emailField.setBorder(emptyBorder);
+		emailField.setBounds(430, 340, 400, 35);
+		add(emailField);
 
-		genderField = new JTextField("Género");
+		bornDate = new JTextField("Fecha de nacimiento");
+		bornDate.setFont(new Font("Roboto", Font.BOLD, 12));
+		bornDate.setBackground(new Color(230, 230, 230));
+		bornDate.setBorder(emptyBorder);
+		bornDate.setBounds(430, 385, 400, 35);
+		add(bornDate);
+
+		genderField = new JComboBox<String>(opciones);
 		genderField.setFont(new Font("Roboto", Font.BOLD, 12));
 		genderField.setBackground(new Color(230, 230, 230));
 		genderField.setBorder(emptyBorder);
@@ -119,20 +121,20 @@ public class RegisterView extends JPanel {
 		this.nameField = nameField;
 	}
 
-	public JTextField getGenderField() {
+	public JComboBox<String> getGenderField() {
 		return genderField;
 	}
 
-	public void setGenderField(JTextField genderField) {
+	public void setGenderField(JComboBox<String> genderField) {
 		this.genderField = genderField;
 	}
 
-	public JTextField getBorndate() {
-		return borndate;
+	public JTextField getBornDate() {
+		return bornDate;
 	}
 
-	public void setBorndate(JTextField borndate) {
-		this.borndate = borndate;
+	public void setBornDate(JTextField bornDate) {
+		this.bornDate = bornDate;
 	}
 
 	public JButton getRegisterBtn() {
@@ -158,5 +160,5 @@ public class RegisterView extends JPanel {
 	public void setBackBtn(JButton backBtn) {
 		this.backBtn = backBtn;
 	}
-	
+
 }
