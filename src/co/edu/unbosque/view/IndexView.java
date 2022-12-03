@@ -2,47 +2,42 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
 public class IndexView extends JPanel {
-
-	private JPanel img;
+	final static String LOGO_PATH = "datos/vudu.png";
+	private JLabel img;
 	private JLabel titleLbl;
-	private JButton fileBtn, registerBtn, loginBtn;
+	private JButton registerBtn, loginBtn;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
 
 	public IndexView() {
-		
-		
+
 		initializeComponents();
-		
+
 		setBackground(Color.white);
 
 	}
 
 	public void initializeComponents() {
 		// Panel size: 1260x590
-		
-		img = new JPanel();
+
+		img = new JLabel();
 		img.setBackground(Color.lightGray);
 		img.setBounds(455, 30, 350, 350);
+		img.setIcon(createLogo());
 		add(img);
 
 		titleLbl = new JLabel("Bienvenido");
 		titleLbl.setFont(new Font("Roboto", Font.BOLD, 24));
 		titleLbl.setBounds(560, 380, 170, 50);
 		add(titleLbl);
-
-		fileBtn = new JButton("+ Buscar archivos de usuario");
-		fileBtn.setFont(new Font("Roboto", Font.BOLD, 14));
-		fileBtn.setBackground(new Color(230, 230, 230));
-		fileBtn.setForeground(new Color(30, 55, 92));
-		fileBtn.setBounds(480, 435, 300, 40);
-		fileBtn.setActionCommand("file");
-		fileBtn.setBorder(emptyBorder);
-		add(fileBtn);
 
 		registerBtn = new JButton("Regístrate");
 		registerBtn.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -63,11 +58,23 @@ public class IndexView extends JPanel {
 
 	}
 
-	public JPanel getImg() {
+	private ImageIcon createLogo() {
+		ImageIcon logo = null;
+		try {
+			BufferedImage img = ImageIO.read(new File(LOGO_PATH));
+			Image rImg = img.getScaledInstance(this.img.getWidth(), this.img.getHeight(), Image.SCALE_SMOOTH);
+			logo = new ImageIcon(rImg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return logo;
+	}
+
+	public JLabel getImg() {
 		return img;
 	}
 
-	public void setImg(JPanel img) {
+	public void setImg(JLabel img) {
 		this.img = img;
 	}
 
@@ -77,14 +84,6 @@ public class IndexView extends JPanel {
 
 	public void setTitleLbl(JLabel titleLbl) {
 		this.titleLbl = titleLbl;
-	}
-
-	public JButton getFileBtn() {
-		return fileBtn;
-	}
-
-	public void setFileBtn(JButton fileBtn) {
-		this.fileBtn = fileBtn;
 	}
 
 	public JButton getRegisterBtn() {
