@@ -5,14 +5,18 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
+
 import co.edu.unbosque.model.Usuario;
 import co.edu.unbosque.model.UsuarioDAO_Impl;
-import co.edu.unbosque.model.UsuarioHombre;
-import co.edu.unbosque.model.UsuarioMujer;
+//import co.edu.unbosque.model.UsuarioHombre;
+//import co.edu.unbosque.model.UsuarioMujer;
 import co.edu.unbosque.model.persistence.ArchivoBinario;
 import co.edu.unbosque.model.persistence.LectorCSV;
 import co.edu.unbosque.view.*;
@@ -21,17 +25,18 @@ import co.edu.unbosque.view.*;
  * @author Dayana Serrano, Mario Martínez, Daniela Murcia, Miguel Sánchez
  *
  */
-public class MainController implements ActionListener {
+public class MainController implements ActionListener, ItemListener {
 
 	final static String RUTA_CSV = "datos/datos.csv";
 	private MainView mainView;
 	private IndexView indexView;
 	private LoginView loginView;
 	private HomeView homeView;
+	private AdminView adminView;
 	private RegisterView registerView;
 	private UsuarioDAO_Impl dao;
-	private UsuarioHombre userHombre;
-	private UsuarioMujer userMujer;
+	// private UsuarioHombre userHombre;
+	// private UsuarioMujer userMujer;
 	private ArrayList<Usuario> lista;
 	private LectorCSV lector;
 	private ArchivoBinario archivo;
@@ -42,10 +47,12 @@ public class MainController implements ActionListener {
 	}
 
 	public void initializeViews() {
+		adminView = new AdminView();
 		mainView = new MainView();
 		indexView = new IndexView();
 		registerView = new RegisterView();
 		loginView = new LoginView();
+		homeView = new HomeView();
 	}
 
 	private void initializeUtils() {
@@ -92,6 +99,7 @@ public class MainController implements ActionListener {
 		mainView.getRegisterView().getBackBtn().addActionListener(this);
 		mainView.getRegisterView().getRegisterBtn().addActionListener(this);
 		mainView.getRegisterView().getLoginBtn().addActionListener(this);
+		mainView.getRegisterView().getGenderField().addItemListener(this);
 	}
 
 	public void loginViewListeners() {
@@ -105,6 +113,32 @@ public class MainController implements ActionListener {
 		mainView.getHomeView().getBackBtn().addActionListener(this);
 	}
 
+	public void adminViewListeners() {
+		mainView.getAdminView().getBackBtn().addActionListener(this);
+		mainView.getAdminView().getToPdfBtn().addActionListener(this);
+		mainView.getAdminView().getToStatsBtn().addActionListener(this);
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		String command = (String) e.getItem();
+		
+		
+		switch(command) {
+		case "Masculino":
+			
+			mainView.getRegisterView().getGenderG().setVisible(false);
+			mainView.getRegisterView().getSalaryField().setVisible(true);
+			
+			break;
+		case "Femenino":
+			
+
+			mainView.getRegisterView().getGenderG().setVisible(true);
+			mainView.getRegisterView().getSalaryField().setVisible(false);
+			break;
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
@@ -125,9 +159,8 @@ public class MainController implements ActionListener {
 
 			break;
 		case "back":
-			mainView.getIndexView().setVisible(true);
-			mainView.getRegisterView().setVisible(false);
-			mainView.getLoginView().setVisible(false);
+			closePanels(mainView.getHomeView(), mainView.getLoginView(), mainView.getRegisterView(),
+					mainView.getAdminView());
 
 		case "valid-access":
 			mainView.getLoginView().setVisible(false);
@@ -135,27 +168,47 @@ public class MainController implements ActionListener {
 			mainView.getHomeView().setVisible(true);
 
 			break;
-		
+
 		case "access":
 			String usuario = mainView.getLoginView().getUserField().getText();
 			String contrasena = mainView.getLoginView().getPassField().getText();
-			
+
 			Usuario user = dao.consultarUsuario(lista, usuario);
-			if(user != null && user.getContrasena().equals(contrasena)) {
+			if (user != null && user.getContrasena().equals(contrasena)) {
 				System.out.println("Usuario se puede loguear");
-				
-				mainView.getLoginView().getUserField().setText("Usuario");
-				mainView.getLoginView().getPassField().setText("Contrase�a");
-				mainView.getLoginView().setVisible(false);
-				mainView.getRegisterView().setVisible(false);
-				mainView.getHomeView().setVisible(true);
+
+				if (usuario == "admin" && contrasena == "testpass") {
+					mainView.getLoginView().setVisible(false);
+					mainView.getRegisterView().setVisible(false);
+					mainView.getHomeView().setVisible(false);
+					mainView.getAdminView().setVisible(true);
+				} else {
+					mainView.getLoginView().setVisible(false);
+					mainView.getRegisterView().setVisible(false);
+					mainView.getHomeView().setVisible(true);
+					mainView.getAdminView().setVisible(false);
+				}
 			} else {
 				mainView.showMsgError("El usuario ingresado no se encuentra registrado");
 			}
 
-			break;
 		}
+	}
 
+	public void closePanels(JPanel home, JPanel login, JPanel register, JPanel admin) {
+		if (home.isVisible()) {
+			home.setVisible(false);
+			mainView.getIndexView().setVisible(true);
+		} else if (login.isVisible()) {
+			login.setVisible(false);
+			mainView.getIndexView().setVisible(true);
+		} else if (register.isVisible()) {
+			register.setVisible(false);
+			mainView.getIndexView().setVisible(true);
+		} else if (admin.isVisible()) {
+			admin.setVisible(false);
+			mainView.getIndexView().setVisible(true);
+		}
 	}
 
 	public MainView getMainView() {
@@ -196,6 +249,20 @@ public class MainController implements ActionListener {
 
 	public void setRegisterView(RegisterView registerView) {
 		this.registerView = registerView;
+	}
+
+	/**
+	 * @return the adminView
+	 */
+	public AdminView getAdminView() {
+		return adminView;
+	}
+
+	/**
+	 * @param adminView the adminView to set
+	 */
+	public void setAdminView(AdminView adminView) {
+		this.adminView = adminView;
 	}
 
 	/**
