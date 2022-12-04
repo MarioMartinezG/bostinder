@@ -47,8 +47,6 @@ public class MainController implements ActionListener, ItemListener {
 	private AdminView adminView;
 	private RegisterView registerView;
 	private UsuarioDAO_Impl dao;
-	// private UsuarioHombre userHombre;
-	// private UsuarioMujer userMujer;
 	private ArrayList<Usuario> lista;
 	private LectorCSV lector;
 	private ArchivoBinario archivo;
@@ -91,11 +89,12 @@ public class MainController implements ActionListener, ItemListener {
 	private void cargarUsuariosCSV() {
 		try {
 			lista = lector.leerArchivoCSV(RUTA_CSV);
-			System.out.println("Tamano lista usuarios CSV: " + lista.size());
 			if (archivo.getArchivoUsuarios().length() == 0) {
 				archivo.escribirEnArchivoUsuarios(lista);
 			} else {
 				System.out.println("El binario de usuarios ya tiene datos creados");
+				System.out.println("Se carga la lista del archivo binario");
+				lista = archivo.leerArchivoUsuarios();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -183,23 +182,28 @@ public class MainController implements ActionListener, ItemListener {
 			 */
 
 			String nombre = mainView.getRegisterView().getNameField().getText();
-			System.out.println("Nombre registro: " + nombre);
 			String alias = "creacion";
 			String contrasena = "test123*";
 			int edad = 20;
 			int estatura = 170;
 			String correo = mainView.getRegisterView().getEmailField().getText();
 			String fechaNacimiento = mainView.getRegisterView().getBornDate().getText();
-			System.out.println("Fecha registro: " + fechaNacimiento);
 			String genero = ((String) mainView.getRegisterView().getGenderField().getSelectedItem()).equals("Masculino")
 					? "H"
 					: "M";
-			System.out.println("Genero : " + (String) mainView.getRegisterView().getGenderField().getSelectedItem());
-			System.out.println("Genero real: " + genero);
 			boolean divorcios;
+			boolean aliasRep = false;
 			Double salario;
 
-			if (validarFormatoCorreo(correo) == false) {
+			for (Usuario usuario : lista) {
+				if(compararAlias(alias, usuario.getUsuario())) {
+					aliasRep = true;
+					break;
+				}
+			}
+			if (aliasRep) {
+				mainView.showMsgError("El alias ingresado ya se encuentra registrado.");
+			} else if (validarFormatoCorreo(correo) == false) {
 				mainView.showMsgError("Formato de correo no valido.");
 			} else if (!validarFormatoFecha(fechaNacimiento)) {
 				mainView.showMsgError("Formato de fecha no valido (Debe ser dd/MM/yyyy).");
@@ -209,7 +213,6 @@ public class MainController implements ActionListener, ItemListener {
 				if (genero.equals("M")) {
 					divorcios = ((String) mainView.getRegisterView().getGenderG().getSelectedItem()).equals("Si") ? true
 							: false;
-					System.out.println("Divorcios : " + (String) mainView.getRegisterView().getGenderG().getSelectedItem());
 					UsuarioMujer usuarioMujer = new UsuarioMujer(nombre, nombre, nombre, genero, alias, contrasena,
 							correo, fechaNacimiento, edad, estatura, true, divorcios);
 					dao.insertarUsuario(lista, usuarioMujer);
@@ -223,7 +226,6 @@ public class MainController implements ActionListener, ItemListener {
 				} else {
 					try {
 						salario = Double.parseDouble(mainView.getRegisterView().getSalaryField().getText());
-						System.out.println("Salario: " + salario);
 						UsuarioHombre usuarioHombre = new UsuarioHombre(nombre, nombre, nombre, genero, alias,
 								contrasena, correo, fechaNacimiento, edad, estatura, true, salario);
 						dao.insertarUsuario(lista, usuarioHombre);
@@ -279,7 +281,7 @@ public class MainController implements ActionListener, ItemListener {
 		}
 	}
 
-	public void closePanels(JPanel home, JPanel login, JPanel register, JPanel admin) {
+	private void closePanels(JPanel home, JPanel login, JPanel register, JPanel admin) {
 		if (home.isVisible()) {
 			home.setVisible(false);
 			mainView.getIndexView().setVisible(true);
@@ -298,8 +300,6 @@ public class MainController implements ActionListener, ItemListener {
 
 	private boolean validarFormatoCorreo(String correo) {
 		String regExCorreo = "^(.+)@(\\S+)$";
-		System.out.println("Correo a validar: " + correo);
-		System.out.println("Resultado validacion correo: " + Pattern.compile(regExCorreo).matcher(correo).matches());
 		return Pattern.compile(regExCorreo).matcher(correo).matches();
 	}
 
@@ -315,7 +315,6 @@ public class MainController implements ActionListener, ItemListener {
 		} catch (ParseException ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("Resultado validacion fecha: " + date != null);
 		return date != null;
 	}
 
@@ -327,29 +326,7 @@ public class MainController implements ActionListener, ItemListener {
 	 */
 
 	private boolean compararAlias(String alias1, String alias2) {
-		/**
-		 * Comparacion usando operador ternario resultado = (condicion)?valor1:valor2;
-		 * Si la condicion evalua a verdadero, retorna valor1; de lo contrario, retorna
-		 * valor2
-		 */
 		boolean resultado = (alias1.equals(alias2)) ? true : false;
-		return resultado;
-	}
-
-	/**
-	 * Metodo para validar correo unico
-	 * 
-	 * @param correo1 - Primer correo a comparar
-	 * @param correo2 - Segundo correo a comparar
-	 */
-
-	private boolean compararCorreo(String correo1, String correo2) {
-		/**
-		 * Comparacion usando operador ternario resultado = (condicion)?valor1:valor2;
-		 * Si la condicion evalua a verdadero, retorna valor1; de lo contrario, retorna
-		 * valor2
-		 */
-		boolean resultado = (correo1.equals(correo2)) ? true : false;
 		return resultado;
 	}
 
