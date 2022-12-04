@@ -166,6 +166,8 @@ public class RegisterView extends JPanel {
 	}
 	
 	public void limpiarCampos() {
+		userField.setText("");
+		heightField.setText("");
 		emailField.setText("");
 		nameField.setText("");
 		bornDate.setText("");
