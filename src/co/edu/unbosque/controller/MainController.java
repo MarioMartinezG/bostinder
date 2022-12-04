@@ -136,7 +136,6 @@ public class MainController implements ActionListener, ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 		String command = (String) e.getItem();
 
-
 		switch (command) {
 		case "Masculino":
 			mainView.getRegisterView().getChangedLbl().setText("Salario");
@@ -178,16 +177,12 @@ public class MainController implements ActionListener, ItemListener {
 			break;
 
 		case "valid-access":
-			/**
-			 * A LA VISTA DEL REGISTRO LE FALTA: ALIAS EDAD ESTATURA - OPCIONAL PARA MUJERES
-			 * / OBLIGATORIA PARA HOMBRES CONTRASE�A
-			 */
 
 			String nombre = mainView.getRegisterView().getNameField().getText();
-			String alias = "creacion";
-			String contrasena = "test123*";
+			String alias = mainView.getRegisterView().getUserField().getText();
+			String contrasena = "loginVudu1234*";
 			int edad = 20;
-			int estatura = 170;
+			int estatura;
 			String correo = mainView.getRegisterView().getEmailField().getText();
 			String fechaNacimiento = mainView.getRegisterView().getBornDate().getText();
 			String genero = ((String) mainView.getRegisterView().getGenderField().getSelectedItem()).equals("Masculino")
@@ -198,7 +193,7 @@ public class MainController implements ActionListener, ItemListener {
 			Double salario;
 
 			for (Usuario usuario : lista) {
-				if(compararAlias(alias, usuario.getUsuario())) {
+				if (compararAlias(alias, usuario.getUsuario())) {
 					aliasRep = true;
 					break;
 				}
@@ -213,45 +208,82 @@ public class MainController implements ActionListener, ItemListener {
 				mainView.showMsgError("Debe ser mayor de 18 a�os para registrarse.");
 			} else {
 				if (genero.equals("M")) {
-					divorcios = ((String) mainView.getRegisterView().getGenderG().getSelectedItem()).equals("Si") ? true
-							: false;
-					UsuarioMujer usuarioMujer = new UsuarioMujer(nombre, nombre, nombre, genero, alias, contrasena,
-							correo, fechaNacimiento, edad, estatura, true, divorcios);
-					dao.insertarUsuario(lista, usuarioMujer);
-					if (archivo.escribirEnArchivoUsuarios(lista)) {
-						mainView.showMsgInfo(
-								"Usuario creado correctamente. Valide el correo para consultar sus credenciales.");
-					} else {
-						mainView.showMsgError("Error al crear usuario. Consulte al administrador.");
-					}
-
-				} else {
-					try {
-						salario = Double.parseDouble(mainView.getRegisterView().getSalaryField().getText());
-						UsuarioHombre usuarioHombre = new UsuarioHombre(nombre, nombre, nombre, genero, alias,
-								contrasena, correo, fechaNacimiento, edad, estatura, true, salario);
-						dao.insertarUsuario(lista, usuarioHombre);
+					if (mainView.getRegisterView().getHeightField().getText().equals("")) {
+						estatura = 0;
+						divorcios = ((String) mainView.getRegisterView().getGenderG().getSelectedItem()).equals("Si")
+								? true
+								: false;
+						UsuarioMujer usuarioMujer = new UsuarioMujer(nombre, nombre, nombre, genero, alias, contrasena,
+								correo, fechaNacimiento, edad, estatura, true, divorcios);
+						dao.insertarUsuario(lista, usuarioMujer);
 						if (archivo.escribirEnArchivoUsuarios(lista)) {
 							mainView.showMsgInfo(
 									"Usuario creado correctamente. Valide el correo para consultar sus credenciales.");
 						} else {
 							mainView.showMsgError("Error al crear usuario. Consulte al administrador.");
 						}
-					} catch (NumberFormatException ex) {
-						mainView.showMsgError(
-								"El salario ingresado no tiene un formato valido (decimales separados por .).");
-						ex.printStackTrace();
+					} else {
+
+						try {
+							estatura = Integer.parseInt(mainView.getRegisterView().getHeightField().getText());
+							divorcios = ((String) mainView.getRegisterView().getGenderG().getSelectedItem())
+									.equals("Si") ? true : false;
+							UsuarioMujer usuarioMujer = new UsuarioMujer(nombre, nombre, nombre, genero, alias,
+									contrasena, correo, fechaNacimiento, edad, estatura, true, divorcios);
+							dao.insertarUsuario(lista, usuarioMujer);
+							if (archivo.escribirEnArchivoUsuarios(lista)) {
+								mainView.showMsgInfo(
+										"Usuario creado correctamente. Valide el correo para consultar sus credenciales.");
+							} else {
+								mainView.showMsgError("Error al crear usuario. Consulte al administrador.");
+							}
+						} catch (NumberFormatException NFe) {
+							NFe.printStackTrace();
+						}
+					}
+
+					if (!this.correo.enviarCorreo(correo, alias, contrasena)) {
+						mainView.showMsgError("No fue posible realizar el envio del correo.");
+					}
+
+					mainView.getLoginView().setVisible(false);
+					mainView.getRegisterView().setVisible(false);
+					mainView.getRegisterView().limpiarCampos();
+					mainView.getHomeView().setVisible(true);
+
+				} else {
+					if (mainView.getRegisterView().getHeightField().getText().equals("")) {
+						mainView.showMsgError("Para genero masculino debe agregar su estatura");
+					} else {
+						estatura = Integer.parseInt(mainView.getRegisterView().getHeightField().getText());
+						try {
+							salario = Double.parseDouble(mainView.getRegisterView().getSalaryField().getText());
+							UsuarioHombre usuarioHombre = new UsuarioHombre(nombre, nombre, nombre, genero, alias,
+									contrasena, correo, fechaNacimiento, edad, estatura, true, salario);
+							dao.insertarUsuario(lista, usuarioHombre);
+							if (archivo.escribirEnArchivoUsuarios(lista)) {
+								mainView.showMsgInfo(
+										"Usuario creado correctamente. Valide el correo para consultar sus credenciales.");
+							} else {
+								mainView.showMsgError("Error al crear usuario. Consulte al administrador.");
+							}
+						} catch (NumberFormatException ex) {
+							mainView.showMsgError(
+									"El salario ingresado no tiene un formato valido (decimales separados por .).");
+							ex.printStackTrace();
+						}
+
+						if (!this.correo.enviarCorreo(correo, alias, contrasena)) {
+							mainView.showMsgError("No fue posible realizar el envio del correo.");
+						}
+
+						mainView.getLoginView().setVisible(false);
+						mainView.getRegisterView().setVisible(false);
+						mainView.getRegisterView().limpiarCampos();
+						mainView.getHomeView().setVisible(true);
 					}
 				}
 
-				if (!this.correo.enviarCorreo(correo, alias, contrasena)) {
-					mainView.showMsgError("No fue posible realizar el envio del correo.");
-				}
-
-				mainView.getLoginView().setVisible(false);
-				mainView.getRegisterView().setVisible(false);
-				mainView.getRegisterView().limpiarCampos();
-				mainView.getHomeView().setVisible(true);
 			}
 
 			break;

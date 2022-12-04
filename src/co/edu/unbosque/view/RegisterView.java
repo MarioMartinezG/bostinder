@@ -192,6 +192,20 @@ public class RegisterView extends JPanel {
 		this.img = img;
 	}
 
+	/**
+	 * @return the userField
+	 */
+	public JTextField getUserField() {
+		return userField;
+	}
+
+	/**
+	 * @param userField the userField to set
+	 */
+	public void setUserField(JTextField userField) {
+		this.userField = userField;
+	}
+
 	public JLabel getTitleLbl() {
 		return titleLbl;
 	}
@@ -366,6 +380,20 @@ public class RegisterView extends JPanel {
 	 */
 	public void setChangedLbl(JLabel changedLbl) {
 		this.changedLbl = changedLbl;
+	}
+
+	/**
+	 * @return the heightField
+	 */
+	public JTextField getHeightField() {
+		return heightField;
+	}
+
+	/**
+	 * @param heightField the heightField to set
+	 */
+	public void setHeightField(JTextField heightField) {
+		this.heightField = heightField;
 	}
 	
 
