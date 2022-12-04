@@ -136,15 +136,17 @@ public class MainController implements ActionListener, ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 		String command = (String) e.getItem();
 
+
 		switch (command) {
 		case "Masculino":
-
+			mainView.getRegisterView().getChangedLbl().setText("Salario");
 			mainView.getRegisterView().getGenderG().setVisible(false);
 			mainView.getRegisterView().getSalaryField().setVisible(true);
 
 			break;
 		case "Femenino":
 
+			mainView.getRegisterView().getChangedLbl().setText("Divorciada");
 			mainView.getRegisterView().getGenderG().setVisible(true);
 			mainView.getRegisterView().getSalaryField().setVisible(false);
 			break;
@@ -178,7 +180,7 @@ public class MainController implements ActionListener, ItemListener {
 		case "valid-access":
 			/**
 			 * A LA VISTA DEL REGISTRO LE FALTA: ALIAS EDAD ESTATURA - OPCIONAL PARA MUJERES
-			 * / OBLIGATORIA PARA HOMBRES CONTRASEÑA
+			 * / OBLIGATORIA PARA HOMBRES CONTRASEï¿½A
 			 */
 
 			String nombre = mainView.getRegisterView().getNameField().getText();
@@ -208,7 +210,7 @@ public class MainController implements ActionListener, ItemListener {
 			} else if (!validarFormatoFecha(fechaNacimiento)) {
 				mainView.showMsgError("Formato de fecha no valido (Debe ser dd/MM/yyyy).");
 			} else if (!validarEdad(fechaNacimiento)) {
-				mainView.showMsgError("Debe ser mayor de 18 años para registrarse.");
+				mainView.showMsgError("Debe ser mayor de 18 aï¿½os para registrarse.");
 			} else {
 				if (genero.equals("M")) {
 					divorcios = ((String) mainView.getRegisterView().getGenderG().getSelectedItem()).equals("Si") ? true
@@ -331,7 +333,7 @@ public class MainController implements ActionListener, ItemListener {
 	}
 
 	/**
-	 * Metodo para validar que la edad del usuario sea mayor a 18 años
+	 * Metodo para validar que la edad del usuario sea mayor a 18 aï¿½os
 	 * 
 	 * @param fechaNacimiento - Fecha de nacimiento del usuario en formato
 	 *                        DD/MM/YYYY
