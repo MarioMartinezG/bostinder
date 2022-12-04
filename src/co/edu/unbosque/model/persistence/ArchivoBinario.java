@@ -65,15 +65,18 @@ public class ArchivoBinario {
 	 * 
 	 * @param listaUsuarios - Arreglo de usuarios deserializado de usuarios.dat
 	 */
-	public void escribirEnArchivoUsuarios(ArrayList<Usuario> listaUsuarios) {
+	public boolean escribirEnArchivoUsuarios(ArrayList<Usuario> listaUsuarios) {
 		try {
 			this.salida = new ObjectOutputStream(new FileOutputStream(this.archivoUsuarios));
 			this.salida.writeObject(listaUsuarios);
 			this.salida.close();
+			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 

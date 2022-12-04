@@ -26,6 +26,7 @@ public abstract class Usuario implements Serializable {
 	protected String correo;
 	protected String fechaNacimiento;
 	protected int edad;
+	protected int estatura;
 	protected int likesRecibidos;
 	protected int likesOtorgados;
 	protected int cantidadMatches;
@@ -44,10 +45,11 @@ public abstract class Usuario implements Serializable {
 	 * @param fechaNacimiento - Fecha de Nacimiento del usuario en formato
 	 *                        DD/MM/YYYY
 	 * @param edad            - Edad del usuario
+	 * @param estatura        - Estatura del usuario en cm
 	 * @param estado          - Estado del usuario
 	 */
-	protected Usuario(String nombre, String apellido1, String apellido2, String genero, String usuario, String contrasena,
-			String correo, String fechaNacimiento, int edad, boolean estado) {
+	protected Usuario(String nombre, String apellido1, String apellido2, String genero, String usuario,
+			String contrasena, String correo, String fechaNacimiento, int edad, int estatura, boolean estado) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
@@ -57,66 +59,11 @@ public abstract class Usuario implements Serializable {
 		this.correo = correo;
 		this.fechaNacimiento = fechaNacimiento;
 		this.edad = edad;
+		this.estatura = estatura;
 		this.likesRecibidos = 0;
 		this.likesOtorgados = 0;
 		this.cantidadMatches = 0;
 		this.estado = estado;
-	}
-
-	/**
-	 * Metodo para validar alias unico
-	 * 
-	 * @param alias1 - Primer alias a comparar
-	 * @param alias2 - Segundo alias a comparar
-	 */
-
-	protected boolean compararAlias(String alias1, String alias2) {
-		/**
-		 * Comparacion usando operador ternario resultado = (condicion)?valor1:valor2;
-		 * Si la condicion evalua a verdadero, retorna valor1; de lo contrario, retorna
-		 * valor2
-		 */
-		boolean resultado = (alias1.equals(alias2)) ? true : false;
-		return resultado;
-	}
-
-	/**
-	 * Metodo para validar correo unico
-	 * 
-	 * @param correo1 - Primer correo a comparar
-	 * @param correo2 - Segundo correo a comparar
-	 */
-
-	protected boolean compararCorreo(String correo1, String correo2) {
-		/**
-		 * Comparacion usando operador ternario resultado = (condicion)?valor1:valor2;
-		 * Si la condicion evalua a verdadero, retorna valor1; de lo contrario, retorna
-		 * valor2
-		 */
-		boolean resultado = (correo1.equals(correo2)) ? true : false;
-		return resultado;
-	}
-
-	/**
-	 * Metodo para validar que la edad del usuario sea mayor a 18 años
-	 * 
-	 * @param fechaNacimiento - Fecha de nacimiento del usuario en formato
-	 *                        DD/MM/YYYY
-	 */
-	protected boolean validarEdad(String fechaNacimiento) {
-		boolean resultado;
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate fecha = LocalDate.parse(fechaNacimiento, formatter);
-		Period edad = Period.between(fecha, LocalDate.now());
-
-		if (edad.getYears() >= 18 && edad.getMonths() >= 0 && edad.getDays() >= 0) {
-			resultado = true;
-		} else {
-			resultado = false;
-		}
-
-		return resultado;
 	}
 
 	/**
@@ -243,6 +190,20 @@ public abstract class Usuario implements Serializable {
 	 */
 	public void setEdad(int edad) {
 		this.edad = edad;
+	}
+
+	/**
+	 * @return the estatura
+	 */
+	public int getEstatura() {
+		return estatura;
+	}
+
+	/**
+	 * @param estatura the estatura to set
+	 */
+	public void setEstatura(int estatura) {
+		this.estatura = estatura;
 	}
 
 	/**

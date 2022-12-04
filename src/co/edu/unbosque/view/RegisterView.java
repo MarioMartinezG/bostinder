@@ -19,7 +19,7 @@ public class RegisterView extends JPanel {
 	final static String LOGO_PATH = "datos/logo.png";
 	private JLabel img;
 	private JLabel titleLbl;
-	private JTextField emailField, nameField, bornDate, salaryField, marriageField ;
+	private JTextField emailField, nameField, bornDate, salaryField;
 	private JComboBox<String> genderField, genderG;
 	private JButton registerBtn, loginBtn, backBtn;
 	final static String opciones[] = { "Masculino", "Femenino" };
@@ -76,12 +76,6 @@ public class RegisterView extends JPanel {
 		genderField.setBounds(430, 390, 400, 35);
 		add(genderField);
 		
-		emailField = new JTextField("Correo electr�nico");
-		emailField.setFont(new Font("Roboto", Font.BOLD, 12));
-		emailField.setBackground(new Color(230, 230, 230));
-		emailField.setBorder(emptyBorder);
-		emailField.setBounds(430, 300, 400, 35);
-		add(emailField);
 		
 		salaryField = new JTextField("Salario");
 		salaryField.setBackground(new Color(230, 230, 230));
@@ -124,6 +118,13 @@ public class RegisterView extends JPanel {
 		backBtn.setActionCommand("back");
 		backBtn.setBorder(emptyBorder);
 		add(backBtn);
+	}
+	
+	public void limpiarCampos() {
+		emailField.setText("");
+		nameField.setText("");
+		bornDate.setText("");
+		salaryField.setText("");
 	}
 
 	private ImageIcon createLogo() {
@@ -222,20 +223,6 @@ public class RegisterView extends JPanel {
 	 */
 	public void setSalaryField(JTextField salaryField) {
 		this.salaryField = salaryField;
-	}
-
-	/**
-	 * @return the marriageField
-	 */
-	public JTextField getMarriageField() {
-		return marriageField;
-	}
-
-	/**
-	 * @param marriageField the marriageField to set
-	 */
-	public void setMarriageField(JTextField marriageField) {
-		this.marriageField = marriageField;
 	}
 
 	/**

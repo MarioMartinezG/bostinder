@@ -77,7 +77,7 @@ public class LectorCSV {
 
 					if (fields[4].equals("H")) {
 						Usuario u = new UsuarioHombre(nombre, apellido1, apellido2, genero, usuario, contrasena, correo,
-								fechaNacimiento, edad, estado, ingresos);
+								fechaNacimiento, edad, 0, estado, ingresos);
 						u.setLikesRecibidos(likesRecibidos);
 						u.setLikesOtorgados(likesOtorgados);
 						u.setCantidadMatches(cantidadMatches);
@@ -85,7 +85,7 @@ public class LectorCSV {
 						lista.add(u);
 					} else if (fields[4].equals("M")) {
 						Usuario u = new UsuarioMujer(nombre, apellido1, apellido2, genero, usuario, contrasena, correo,
-								fechaNacimiento, edad, estado, divorcios);
+								fechaNacimiento, edad, 0, estado, divorcios);
 						u.setLikesRecibidos(likesRecibidos);
 						u.setLikesOtorgados(likesOtorgados);
 						u.setCantidadMatches(cantidadMatches);

@@ -3,8 +3,6 @@
  */
 package co.edu.unbosque.model;
 
-import java.util.Date;
-
 /**
  * @author Andres.Martinez
  *
@@ -27,12 +25,15 @@ public class UsuarioHombre extends Usuario {
 	 * @param fechaNacimiento   - Fecha de Nacimiento del usuario en formato
 	 *                          DD/MM/YYYY
 	 * @param edad              - Edad del usuario
+	 * @param estatura          - Estatura del usuario
 	 * @param estado            - Estado del usuario
 	 * @param ingresosMensuales - Ingresos del Usuario Hombre
 	 */
 	public UsuarioHombre(String nombre, String apellido1, String apellido2, String genero, String usuario,
-			String contrasena, String correo, String fechaNacimiento, int edad, boolean estado, double ingresosMensuales) {
-		super(nombre, apellido1, apellido2, genero, usuario, contrasena, correo, fechaNacimiento, edad, estado);
+			String contrasena, String correo, String fechaNacimiento, int edad, int estatura, boolean estado,
+			double ingresosMensuales) {
+		super(nombre, apellido1, apellido2, genero, usuario, contrasena, correo, fechaNacimiento, edad, estatura,
+				estado);
 		this.ingresosMensuales = ingresosMensuales;
 	}
 

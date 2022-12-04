@@ -28,7 +28,7 @@ public class CRUDTestCase {
 	public void setUp() throws Exception {
 		dao = new UsuarioDAO_Impl();
 		usuarioTest = new UsuarioHombre("Usuario test", "Apellido1", "Apellido2", "H", "TestUser", "Test123*",
-				"test@test.com", "31/05/1996", 26, true, 500);
+				"test@test.com", "31/05/1996", 26, 150, true, 500);
 		lista = new ArrayList<>();
 	}
 
@@ -81,7 +81,7 @@ public class CRUDTestCase {
 	@Test
 	public void testModificarUsuario() {
 		Usuario usuario1 = new UsuarioHombre("Usuario test", "Apellido1", "Apellido2", "H", "TestUser", "Test123*",
-				"cambiocorreo@test.com", "31/05/1996", 26, true, 500);
+				"cambiocorreo@test.com", "31/05/1996", 26, 170, true, 500);
 		lista.add(usuarioTest);
 		boolean modificaUsuario = dao.modificarUsuario(lista, usuario1);
 		assertEquals("Debe modificar el usuario respectivo por nombre.", true, modificaUsuario);
