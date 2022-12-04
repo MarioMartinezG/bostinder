@@ -5,23 +5,27 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
 public class LoginView extends JPanel {
-	final static String LOGO_PATH = "datos/vudu.png";
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	final static String LOGO_PATH = "datos/logo.png";
 	private JLabel img;
 	private JLabel titleLbl;
 	private JTextField userField, passField;
 	private JButton loginBtn, backBtn, registerBtn;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
+	Color colorbg = new Color(244, 236, 224);
 
 	public LoginView() {
 
-		setBackground(Color.white);
+		setBackground(colorbg);
 		initializeComponents();
 
 	}
@@ -31,7 +35,7 @@ public class LoginView extends JPanel {
 
 		img = new JLabel();
 		img.setBackground(Color.lightGray);
-		img.setBounds(60, 30, 70, 70);
+		img.setBounds(60, 20, 70, 70);
 		img.setIcon(createLogo());
 		add(img);
 
@@ -40,21 +44,21 @@ public class LoginView extends JPanel {
 		titleLbl.setBounds(140, 30, 300, 50);
 		add(titleLbl);
 
-		userField = new JTextField("Usuario");
+		userField = new JTextField("admin");
 		userField.setFont(new Font("Roboto", Font.BOLD, 12));
 		userField.setBackground(new Color(230, 230, 230));
 		userField.setBorder(emptyBorder);
 		userField.setBounds(430, 330, 400, 35);
 		add(userField);
 
-		passField = new JTextField("Contraseña");
+		passField = new JTextField("testpass");
 		passField.setBackground(new Color(230, 230, 230));
 		passField.setFont(new Font("Roboto", Font.BOLD, 12));
 		passField.setBorder(emptyBorder);
 		passField.setBounds(430, 375, 400, 35);
 		add(passField);
 
-		registerBtn = new JButton("Iniciar sesión");
+		registerBtn = new JButton("Iniciar sesiï¿½n");
 		registerBtn.setFont(new Font("Roboto", Font.BOLD, 14));
 		registerBtn.setBackground(new Color(30, 55, 92));
 		registerBtn.setBounds(480, 480, 300, 40);
@@ -63,7 +67,7 @@ public class LoginView extends JPanel {
 		registerBtn.setBorder(emptyBorder);
 		add(registerBtn);
 
-		loginBtn = new JButton("¿Aún no tienes una cuenta? Registrate");
+		loginBtn = new JButton("ï¿½Aï¿½n no tienes una cuenta? Registrate");
 		loginBtn.setFont(new Font("Roboto", Font.BOLD, 12));
 		loginBtn.setBackground(Color.white);
 		loginBtn.setBounds(480, 530, 300, 30);

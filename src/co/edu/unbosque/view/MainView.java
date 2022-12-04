@@ -1,5 +1,7 @@
 package co.edu.unbosque.view;
 
+import java.util.Locale;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -9,6 +11,7 @@ public class MainView extends JFrame {
 	IndexView indexView;
 	LoginView loginView;
 	HomeView homeView;
+	AdminView adminView;
 
 	public MainView() {
 
@@ -29,6 +32,7 @@ public class MainView extends JFrame {
 		addRegisterPanel();
 		addLoginPanel();
 		addHomePanel();
+		addAdminPanel();
 	}
 
 	public void addIndexPanel() {
@@ -64,13 +68,21 @@ public class MainView extends JFrame {
 		homeView.setVisible(false);
 
 	}
+	public void addAdminPanel() {
+		adminView = new AdminView();;
+		adminView.setBounds(0, 0, 1290, 650);
+		adminView.setLayout(null);
+		getContentPane().add(adminView);
+		adminView.setVisible(false);
+		
+	}
 	
 	public void showMsgError(String message) {
 		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public void showMsgInfo(String message) {
-		JOptionPane.showMessageDialog(null, message, "Información", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, message, "Informaciï¿½n", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public RegisterView getRegisterView() {
@@ -103,6 +115,20 @@ public class MainView extends JFrame {
 
 	public void setHomeView(HomeView homeView) {
 		this.homeView = homeView;
+	}
+
+	/**
+	 * @return the adminView
+	 */
+	public AdminView getAdminView() {
+		return adminView;
+	}
+
+	/**
+	 * @param adminView the adminView to set
+	 */
+	public void setAdminView(AdminView adminView) {
+		this.adminView = adminView;
 	}
 	
 
