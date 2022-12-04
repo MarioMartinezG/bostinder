@@ -11,17 +11,22 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 public class IndexView extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final static String LOGO_PATH = "datos/vudu.png";
 	private JLabel img;
 	private JLabel titleLbl;
 	private JButton registerBtn, loginBtn;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
+	Color colorbg = new Color(244, 236, 224);
 
 	public IndexView() {
 
 		initializeComponents();
 
-		setBackground(Color.white);
+		setBackground(colorbg);
 
 	}
 
@@ -29,7 +34,7 @@ public class IndexView extends JPanel {
 		// Panel size: 1260x590
 
 		img = new JLabel();
-		img.setBackground(Color.lightGray);
+		img.setBackground(colorbg);
 		img.setBounds(455, 30, 350, 350);
 		img.setIcon(createLogo());
 		add(img);
@@ -39,7 +44,7 @@ public class IndexView extends JPanel {
 		titleLbl.setBounds(560, 380, 170, 50);
 		add(titleLbl);
 
-		registerBtn = new JButton("Regístrate");
+		registerBtn = new JButton("Regï¿½strate");
 		registerBtn.setFont(new Font("Roboto", Font.BOLD, 14));
 		registerBtn.setBackground(new Color(30, 55, 92));
 		registerBtn.setBounds(480, 480, 300, 40);
@@ -48,7 +53,7 @@ public class IndexView extends JPanel {
 		registerBtn.setBorder(emptyBorder);
 		add(registerBtn);
 
-		loginBtn = new JButton("¿Ya tienes una cuenta? Inicia sesión");
+		loginBtn = new JButton("ï¿½Ya tienes una cuenta? Inicia sesiï¿½n");
 		loginBtn.setFont(new Font("Roboto", Font.BOLD, 12));
 		loginBtn.setBackground(Color.white);
 		loginBtn.setBounds(480, 530, 300, 30);
