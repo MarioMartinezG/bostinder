@@ -1,7 +1,7 @@
 /**
  * Clase para construir un PDF
  */
-package co.edu.unbosque.model;
+package co.edu.unbosque.model.persistence;
 
 import java.io.InputStream;
 
