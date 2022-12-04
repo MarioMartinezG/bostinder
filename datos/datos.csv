@@ -465,3 +465,4 @@ Id;Nombre;Apellido1;Apellido2;Sexo;Usuario;Contrase�a;Correo;Nacimiento;Edad;I
 464;Rocío;Del Valle;Ribera;M;r.de;[C%v$cq,/k&2*:r;r.de@mail.net;25/02/1985;34;;SI;73;99;0;Inactivo
 465;Carlos;Carrasco;Da Silva;H;carloscarrasco;$ZAX/d&-=!9@?MQ;carloscarrasco@email.net;26/08/1980;39;874,98;No Aplica;53;92;1;Inactivo
 466;Juan Carlos;Galindo;Santana;H;juagalindo;P,u[2PyrjNM_:_9;juagalindo@correo.net;13/12/2001;17;717,09;No Aplica;35;59;3;Disponible
+467;Usuario Administrador;admin;;H;admin;testpass;admin@admin.com;13/12/2001;17;717,09;No Aplica;35;59;3;Disponible
