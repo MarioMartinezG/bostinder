@@ -51,6 +51,7 @@ public class MainController implements ActionListener, ItemListener {
 	private LectorCSV lector;
 	private ArchivoBinario archivo;
 	private EnvioCorreo correo;
+	private int i;
 
 	public MainController() {
 
@@ -124,6 +125,9 @@ public class MainController implements ActionListener, ItemListener {
 	public void homeViewListernes() {
 
 		mainView.getHomeView().getBackBtn().addActionListener(this);
+		mainView.getHomeView().getLikeBtn().addActionListener(this);
+		mainView.getHomeView().getDeclineBtn().addActionListener(this);
+
 	}
 
 	public void adminViewListeners() {
@@ -157,6 +161,16 @@ public class MainController implements ActionListener, ItemListener {
 		System.out.println(e.getActionCommand());
 		String command = e.getActionCommand();
 		switch (command) {
+
+		case "home-like":
+			i++;
+			cargarUsuarios(lista, i);
+			break;
+		case "home-refuse":
+			i++;
+			cargarUsuarios(lista, i);
+			break;
+
 		case "file":
 			break;
 
@@ -286,6 +300,8 @@ public class MainController implements ActionListener, ItemListener {
 
 			}
 
+			cargarUsuarios(lista, 0);
+
 			break;
 
 		case "access":
@@ -312,7 +328,29 @@ public class MainController implements ActionListener, ItemListener {
 				mainView.showMsgError("El usuario ingresado no se encuentra registrado");
 			}
 
+			cargarUsuarios(lista, 0);
+			break;
+
 		}
+	}
+
+	private void cargarUsuarios(ArrayList<Usuario> lista2, int i) {
+
+		Usuario usuario = lista.get(i);
+		mainView.getHomeView().getNameLbl().setText(usuario.getNombre() + ", " + usuario.getEdad());
+		mainView.getHomeView().getDescriptionLbl()
+				.setText("Fecha de nacimiento: " + usuario.getFechaNacimiento() + ", Edad: " + usuario.getEdad());
+		if (usuario.getGenero().equals("H")) {
+			UsuarioHombre userH = (UsuarioHombre) usuario;
+			mainView.getHomeView().getSalaryLbl().setText("Salario: " + userH.getIngresosMensuales());
+		} else {
+			UsuarioMujer userM = (UsuarioMujer) usuario;
+			String divorcio = (userM.isDivorcios() == true) ? "Si" : "No";
+			mainView.getHomeView().getMarriageLbl().setText("Divorciada: " + divorcio);
+		}
+
+		i = (i == lista.size()) ? 0 : i++;
+
 	}
 
 	private void closePanels(JPanel home, JPanel login, JPanel register, JPanel admin) {
