@@ -44,14 +44,14 @@ public class LoginView extends JPanel {
 		titleLbl.setBounds(140, 30, 300, 50);
 		add(titleLbl);
 
-		userField = new JTextField("admin");
+		userField = new JTextField("Ingrese su usuario");
 		userField.setFont(new Font("Roboto", Font.BOLD, 12));
 		userField.setBackground(new Color(230, 230, 230));
 		userField.setBorder(emptyBorder);
 		userField.setBounds(430, 330, 400, 35);
 		add(userField);
 
-		passField = new JTextField("testpass");
+		passField = new JTextField("Ingrese su contraseña");
 		passField.setBackground(new Color(230, 230, 230));
 		passField.setFont(new Font("Roboto", Font.BOLD, 12));
 		passField.setBorder(emptyBorder);

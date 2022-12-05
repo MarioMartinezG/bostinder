@@ -174,4 +174,32 @@ public class HomeView extends JPanel {
 		this.declineBtn = declineBtn;
 	}
 
+	/**
+	 * @return the salaryLbl
+	 */
+	public JLabel getSalaryLbl() {
+		return salaryLbl;
+	}
+
+	/**
+	 * @param salaryLbl the salaryLbl to set
+	 */
+	public void setSalaryLbl(JLabel salaryLbl) {
+		this.salaryLbl = salaryLbl;
+	}
+
+	/**
+	 * @return the marriageLbl
+	 */
+	public JLabel getMarriageLbl() {
+		return marriageLbl;
+	}
+
+	/**
+	 * @param marriageLbl the marriageLbl to set
+	 */
+	public void setMarriageLbl(JLabel marriageLbl) {
+		this.marriageLbl = marriageLbl;
+	}
+
 }
