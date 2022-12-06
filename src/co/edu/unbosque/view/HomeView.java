@@ -63,7 +63,7 @@ public class HomeView extends JPanel {
 		marriageLbl.setFont(new Font("Roboto", Font.BOLD, 14));
 		marriageLbl.setBounds(480, 250, 400, 50);
 		add(marriageLbl);
-		marriageLbl.setVisible(false);
+		marriageLbl.setVisible(true);
 		
 		likeBtn = new JButton("LIKE");
 		likeBtn.setFont(new Font("Roboto", Font.BOLD, 14));

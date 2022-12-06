@@ -336,20 +336,31 @@ public class MainController implements ActionListener, ItemListener {
 
 	private void cargarUsuarios(ArrayList<Usuario> lista2, int i) {
 
-		Usuario usuario = lista.get(i);
+		ArrayList<Usuario> listaActivos = new ArrayList<>();
+
+		for (Usuario usuario : lista) {
+			if (usuario.isEstado()) {
+				listaActivos.add(usuario);
+			}
+		}
+
+		Usuario usuario = listaActivos.get(i);
+
 		mainView.getHomeView().getNameLbl().setText(usuario.getNombre() + ", " + usuario.getEdad());
 		mainView.getHomeView().getDescriptionLbl()
 				.setText("Fecha de nacimiento: " + usuario.getFechaNacimiento() + ", Edad: " + usuario.getEdad());
 		if (usuario.getGenero().equals("H")) {
 			UsuarioHombre userH = (UsuarioHombre) usuario;
+			mainView.getHomeView().getMarriageLbl().setText("");
 			mainView.getHomeView().getSalaryLbl().setText("Salario: " + userH.getIngresosMensuales());
 		} else {
 			UsuarioMujer userM = (UsuarioMujer) usuario;
 			String divorcio = (userM.isDivorcios() == true) ? "Si" : "No";
+			mainView.getHomeView().getSalaryLbl().setText("");
 			mainView.getHomeView().getMarriageLbl().setText("Divorciada: " + divorcio);
 		}
 
-		i = (i == lista.size()) ? 0 : i++;
+		i = (i == listaActivos.size()) ? 0 : i++;
 
 	}
 
